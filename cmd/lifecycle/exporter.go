@@ -309,7 +309,7 @@ func (ea exportArgs) export(group buildpack.Group, cacheStore lifecycle.Cache, a
 	if err != nil {
 		return cmd.FailErrCode(err, ea.platform.CodeFor(cmd.ExportError), "export")
 	}
-	if err := lifecycle.WriteTOML(ea.reportPath, &report); err != nil {
+	if err := buildpack.WriteTOML(ea.reportPath, &report); err != nil {
 		return cmd.FailErrCode(err, ea.platform.CodeFor(cmd.ExportError), "write export report")
 	}
 

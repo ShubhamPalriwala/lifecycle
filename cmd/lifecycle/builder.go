@@ -105,7 +105,7 @@ func (ba buildArgs) build(group buildpack.Group, plan platform.BuildPlan) error 
 		return cmd.FailErrCode(err, ba.platform.CodeFor(cmd.BuildError), "build")
 	}
 
-	if err := lifecycle.WriteTOML(launch.GetMetadataFilePath(ba.layersDir), md); err != nil {
+	if err := buildpack.WriteTOML(launch.GetMetadataFilePath(ba.layersDir), md); err != nil {
 		return cmd.FailErr(err, "write build metadata")
 	}
 	return nil

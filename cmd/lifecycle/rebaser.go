@@ -14,6 +14,7 @@ import (
 	"github.com/buildpacks/lifecycle"
 	"github.com/buildpacks/lifecycle/api"
 	"github.com/buildpacks/lifecycle/auth"
+	"github.com/buildpacks/lifecycle/buildpack"
 	"github.com/buildpacks/lifecycle/cmd"
 	"github.com/buildpacks/lifecycle/image"
 	"github.com/buildpacks/lifecycle/platform"
@@ -122,7 +123,7 @@ func (r *rebaseCmd) Exec() error {
 	if err != nil {
 		return cmd.FailErrCode(err, r.platform.CodeFor(cmd.RebaseError), "rebase")
 	}
-	if err := lifecycle.WriteTOML(r.reportPath, &report); err != nil {
+	if err := buildpack.WriteTOML(r.reportPath, &report); err != nil {
 		return cmd.FailErrCode(err, r.platform.CodeFor(cmd.RebaseError), "write rebase report")
 	}
 	return nil
