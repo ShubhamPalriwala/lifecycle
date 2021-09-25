@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'release/**'
+      - 'cache-modules'
   pull_request:
     branches:
       - main
@@ -19,6 +20,13 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.16'
+      - name: Cache Go modules
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Install jq
         run: |
           mkdir -p deps/bin
@@ -43,6 +51,13 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.16'
+      - name: Cache Go modules
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Test
         run: |
           make format || true
@@ -60,6 +75,13 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.16'
+      - name: Cache Go modules
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Add runner IP to daemon insecure-registries and firewall
         shell: powershell
         run: |
@@ -108,6 +130,13 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.16'
+      - name: Cache Go modules
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
       - name: Install Cosign
         uses: sigstore/cosign-installer@v1.0.0
         with:
